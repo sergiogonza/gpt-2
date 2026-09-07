@@ -1,0 +1,14 @@
+[
+  {
+    "id":"github-node",
+    "title":"JavaScript y Node.js",
+    "category":"github-code",
+    "text":"Node.js permite ejecutar JavaScript en servidores y es utilizado para crear APIs, aplicaciones web y funciones serverless."
+  },
+  {
+    "id":"github-rag",
+    "title":"RAG Engine",
+    "category":"github-code",
+    "text":"Un motor RAG recupera información desde documentos externos antes de generar una respuesta con un modelo de lenguaje."
+  }
+]
