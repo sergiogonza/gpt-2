@@ -1,0 +1,11 @@
+[
+  {
+    "id": "doc-001",
+    "source": "system",
+    "text": "RAG usa recuperación de información y generación de lenguaje.",
+    "embedding": [0.12,0.21,0.31,0.44],
+    "metadata": {
+      "type": "corpus"
+    }
+  }
+]
