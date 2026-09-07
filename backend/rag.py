@@ -2,6 +2,12 @@ import os
 import json
 
 try:
+    from faiss_engine import engine as faiss_engine
+    FAISS_AVAILABLE = True
+except Exception:
+    FAISS_AVAILABLE = False
+
+try:
     from sentence_transformers import SentenceTransformer
     import numpy as np
     SEMANTIC_AVAILABLE = True
@@ -27,8 +33,7 @@ class CorpusEngine:
                         full = os.path.join(root, file)
                         try:
                             with open(full, "r", encoding="utf-8", errors="ignore") as f:
-                                content = f.read()
-                                docs.append({"source": full, "content": content})
+                                docs.append({"source": full, "content": f.read()})
                         except Exception:
                             pass
 
@@ -57,18 +62,28 @@ class CorpusEngine:
             scores.append((score, docs[index]))
 
         scores.sort(key=lambda x: x[0], reverse=True)
-        return scores[:limit]
+        return [item[1] for item in scores[:limit]]
 
 
 def retrieve_context(query):
+    # Primero intenta usar FAISS persistente
+    if FAISS_AVAILABLE:
+        try:
+            results = faiss_engine.search(query, limit=3)
+            if results:
+                return "\n\n".join(
+                    item.get("content", "")[:1000]
+                    for item in results
+                )
+        except Exception:
+            pass
+
+    # Fallback al motor semántico dinámico
     engine = CorpusEngine()
     results = engine.semantic_search(query)
 
-    if not results:
-        return ""
-
     return "\n\n".join(
-        item[1]["content"][:1000]
+        item["content"][:1000]
         for item in results
     )
 
