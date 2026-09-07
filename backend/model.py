@@ -9,7 +9,8 @@ def get_model():
     return _generator
 
 
-def generate(prompt):
+def generate(prompt, context=""):
     model = get_model()
-    result = model(prompt, max_length=120, num_return_sequences=1)
+    full_prompt = f"Context:\n{context}\n\nQuestion:\n{prompt}\n\nAnswer:"
+    result = model(full_prompt, max_length=200, num_return_sequences=1)
     return result[0]["generated_text"]
