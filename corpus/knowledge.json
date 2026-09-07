@@ -1,0 +1,20 @@
+[
+  {
+    "id":"ai-basics",
+    "category":"texto",
+    "title":"Inteligencia artificial",
+    "text":"La inteligencia artificial permite crear sistemas que analizan datos, reconocen patrones y generan respuestas mediante modelos computacionales."
+  },
+  {
+    "id":"rag-basics",
+    "category":"texto",
+    "title":"RAG Retrieval Augmented Generation",
+    "text":"RAG combina recuperación de información con un modelo generativo para entregar respuestas usando una base de conocimiento externa."
+  },
+  {
+    "id":"gpt2",
+    "category":"codigo",
+    "title":"GPT-2 Transformer",
+    "text":"GPT-2 es un modelo de lenguaje basado en arquitectura Transformer que genera texto prediciendo secuencias."
+  }
+]
