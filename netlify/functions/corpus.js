@@ -12,13 +12,13 @@ const corpus = [
   {
     id: "gpt2",
     title: "GPT-2",
-    text: "GPT-2 es un modelo de lenguaje basado en Transformers entrenado para predecir texto y generar respuestas.">
+    text: "GPT-2 es un modelo de lenguaje basado en Transformers entrenado para predecir texto y generar respuestas."
   }
 ];
 
 function searchCorpus(query){
-  const q=query.toLowerCase();
-  return corpus.filter(item=>
+  const q=(query || "").toLowerCase();
+  return corpus.filter(item =>
     item.text.toLowerCase().includes(q) ||
     item.title.toLowerCase().includes(q)
   ).slice(0,3);
