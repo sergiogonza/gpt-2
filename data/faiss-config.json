@@ -1,0 +1,8 @@
+{
+  "index":"FlatIP",
+  "metric":"cosine_similarity",
+  "dimension":4,
+  "top_k":5,
+  "normalization":true,
+  "backend":"netlify-js-compatible"
+}
