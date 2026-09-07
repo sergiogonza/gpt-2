@@ -1,0 +1,5 @@
+{
+  "title":"Example knowledge",
+  "type":"text",
+  "content":"Este corpus puede contener conocimiento personalizado para el asistente RAG."
+}
