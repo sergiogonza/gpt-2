@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
+import os
 from pathlib import Path
 from datetime import datetime
 
@@ -36,7 +37,21 @@ class FeedbackRequest(BaseModel):
 
 @app.get("/")
 def health():
-    return {"status":"online","engine":"gpt-2-semantic-rag"}
+    return {
+        "status":"online",
+        "engine":"gpt-2-semantic-rag",
+        "model":"pending",
+        "rag":True
+    }
+
+@app.get("/api/status")
+def status():
+    return {
+        "api":"online",
+        "model_loaded":False,
+        "rag_enabled":True,
+        "memory_enabled":True
+    }
 
 @app.post("/api/chat")
 def chat(data: ChatRequest):
