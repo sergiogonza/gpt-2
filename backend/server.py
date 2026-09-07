@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from model import generate
+from rag import retrieve_context
 
 app = FastAPI(title="GPT-2 RAG Assistant")
 
@@ -13,4 +14,9 @@ def home():
 
 @app.post("/chat")
 def chat(req: ChatRequest):
-    return {"response": generate(req.prompt)}
+    context = retrieve_context(req.prompt)
+    answer = generate(req.prompt, context)
+    return {
+        "response": answer,
+        "context": context
+    }
