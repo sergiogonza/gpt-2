@@ -1,0 +1,31 @@
+name: Build FAISS Index
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'corpus_engine/**'
+      - 'backend/build_index.py'
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install faiss-cpu sentence-transformers numpy
+
+      - name: Generate FAISS index
+        run: |
+          python backend/build_index.py
+
+      - name: Show generated files
+        run: |
+          ls -lh backend/vector_store
