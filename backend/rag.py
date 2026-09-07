@@ -1,7 +1,7 @@
 import os
 
 class CorpusEngine:
-    def __init__(self, path="corpus"):
+    def __init__(self, path="../corpus_engine"):
         self.path = path
 
     def load(self):
@@ -15,5 +15,20 @@ class CorpusEngine:
         return docs
 
 
+def retrieve_context(query):
+    engine = CorpusEngine()
+    docs = engine.load()
+    matches = []
+
+    words = query.lower().split()
+    for doc in docs:
+        score = sum(1 for word in words if word in doc.lower())
+        if score:
+            matches.append((score, doc[:1000]))
+
+    matches.sort(reverse=True, key=lambda x: x[0])
+    return "\n\n".join(item[1] for item in matches[:3])
+
+
 def retrieve(query):
-    return ""
+    return retrieve_context(query)
